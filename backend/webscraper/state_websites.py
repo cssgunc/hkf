@@ -38,6 +38,7 @@ class StateWebsite(object):
             return None
         return resp.data if resp.status == 200 else None
 
+
 state_websites = {}
 state_websites["TX"] = StateWebsite("https://inmate.tdcj.texas.gov/InmateSearch/search.action", "search", {
     "first_name": "firstName",

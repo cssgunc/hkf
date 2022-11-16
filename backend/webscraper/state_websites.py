@@ -4,6 +4,7 @@ import urllib3
 http = urllib3.PoolManager()
 
 
+# handles queries to a specific state website
 class StateWebsite(object):
     def __init__(self, url, post_ext: str, input_map: dict[str, type: str]):
         self.url = url

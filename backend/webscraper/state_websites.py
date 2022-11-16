@@ -1,4 +1,7 @@
 import typing
+from bs4 import BeautifulSoup
+from abc import abstractmethod
+
 import urllib3
 
 http = urllib3.PoolManager()
@@ -11,26 +14,6 @@ class StateWebsite(object):
         self.post_ext = post_ext
         self.input_map = input_map
 
-    # inputs data into website and submits, landing on response page
-    def query_post(self, first_name: str, last_name: str, inmate_id: str, prison_name: str, add1: str, city: str, state: str, zip: str) -> dict | None:
-        fields = {}
-
-        def add_field(name, value):
-            if name in self.input_map.keys():
-                fields[self.input_map[name]] = value
-
-        add_field("first_name", first_name)
-        add_field("last_name", last_name)
-        add_field("inmate_id", inmate_id)
-        add_field("prison_name", prison_name)
-        add_field("add1", add1)
-        add_field("city", city)
-        add_field("state", state)
-        add_field("zip", zip)
-
-        resp = http.request('POST', self.url + "/" + self.post_ext, fields=fields)
-        return resp.data if resp.status == 200 else None
-
     # visits base website
     def get_page(self) -> str | None:
         resp = http.request('GET', self.url)
@@ -38,9 +21,39 @@ class StateWebsite(object):
             return None
         return resp.data if resp.status == 200 else None
 
+    # inputs data into website and submits, landing on response page
+    # can be overridden if needed
+    def query_post(self, data: dict[str, type: str]) -> BeautifulSoup | None:
+        # input fields
+        fields = {}
+        for name in data.keys():
+            if name in self.input_map.keys():
+                fields[self.input_map[name]] = data[name]
 
+        # post
+        post_resp = http.request('POST', self.url + "/" + self.post_ext, fields=fields)
+        return BeautifulSoup(post_resp.data, "html.parser") if post_resp.status == 200 else None
+
+    # handles full query + parsing response
+    # should call query_post first to get response landing page
+    @abstractmethod
+    def query(self, data: dict[str, type: str]):
+        pass
+
+
+class TexasWebsite(StateWebsite):
+    def __init__(self):
+        super().__init__("https://inmate.tdcj.texas.gov/InmateSearch/search.action", "search", {
+            "first_name": "firstName",
+            "last_name": "lastName"
+        })
+
+    def query(self, data: dict[str, type: str]) -> dict | None:
+        landing_page = super().query_post(data)
+        # TODO: pull data from landing page
+        return {"landing_page": landing_page} if landing_page is not None else None
+
+
+# maps state id to state website
 state_websites = {}
-state_websites["TX"] = StateWebsite("https://inmate.tdcj.texas.gov/InmateSearch/search.action", "search", {
-    "first_name": "firstName",
-    "last_name": "lastName"
-})
+state_websites["TX"] = TexasWebsite()

@@ -8,19 +8,26 @@ http = urllib3.PoolManager()
 
 # runs a query using data from csv
 def query(first_name: str, last_name: str, inmate_id: str, prison_name: str, add1: str, city: str, state: str, zip: str) -> dict | None:
+    # get state-specific website
     website = state_websites[state]
+
+    # package parameters
+    query_data = {"first_name": first_name, "last_name": last_name, "inmate_id": inmate_id, "prison_name": prison_name,
+            "add1": add1, "city": city, "state": state, "zip": zip}
 
     # query
     print("SENDING QUERY")
-    data = website.query_post(first_name, last_name, inmate_id, prison_name, add1, city, state, zip)
-    if data is None:
+    response_data = website.query(query_data)
+    if (response_data == None):
         return None
-    soup = BeautifulSoup(data, "html.parser")
+    soup = response_data["landing_page"]
 
     # TEST CODE
     print("STORING OUTPUT")
-    with open("test.html", "w") as f:
-        f.write(soup.prettify())
+    with open("webscraper/test.html", "w") as f:
+        o = str(soup.prettify())
+        o = o[o.find("<"):]
+        f.write(o)
 
     # return result
     return {}

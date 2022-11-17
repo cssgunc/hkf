@@ -1,32 +1,16 @@
-import React, {Component} from 'react';
-import ButtonComponent from './ButtonComponent';
-import ChooseComponent from './ChooseFileComponent';
+import React from "react";
+import ChooseFileComponent from "./components/ChooseFileComponent";
 
-class App extends Component {
-
-  render() {
-    return (
-        <div>
-            <div className="app-body">
-                <h1>HKF</h1>
-                <ChooseComponent/> <br/><br/>
-            </div>
-        </div>
-    );
-  }
-
-
-  constructor() {
-    super();
-
-    this.state = {
-      result: ""
-    }
-  }
-
-  onClick = button => {
-  }
-
+function App() {
+  return (
+    <div>
+      <div className="app-body">
+        <h1>HKF</h1>
+        <ChooseFileComponent /> <br />
+        <br />
+      </div>
+    </div>
+  );
 }
 
 export default App;

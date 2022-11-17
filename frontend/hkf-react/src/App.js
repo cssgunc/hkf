@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+import ButtonComponent from './ButtonComponent';
+import ChooseComponent from './ChooseFileComponent';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+  render() {
+    return (
+        <div>
+            <div className="app-body">
+                <h1>HKF</h1>
+                <ChooseComponent/> <br/><br/>
+            </div>
+        </div>
+    );
+  }
+
+
+  constructor() {
+    super();
+
+    this.state = {
+      result: ""
+    }
+  }
+
+  onClick = button => {
+  }
+
 }
 
 export default App;

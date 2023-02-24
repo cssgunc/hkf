@@ -1,10 +1,14 @@
 import React, { useState } from "react";
+import axios from 'axios';
 import { read, utils, write, writeFile } from "xlsx";
 
 function ChooseFileComponent() {
   const [people, setPeople] = useState([]);
+  const [excel, setExcel] = useState([]);
 
   function handleImport(event) {
+    setPeople(event.target.files[0]);
+
     const files = event.target.files;
     if (files.length) {
       const file = files[0];
@@ -15,14 +19,26 @@ function ChooseFileComponent() {
 
         if (sheets.length) {
           const rows = utils.sheet_to_json(wb.Sheets[sheets[0]]);
-          setPeople(rows);
+          setExcel(rows);
         }
       };
       reader.readAsArrayBuffer(file);
     }
   }
 
-  function handleDownload() {
+  function handleDownload(e) {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('profileImg', people);
+    axios.post('https://8ed818d6-4b3c-405d-b4d8-0c3dae7eec19.mock.pstmn.io/post', formData, {
+    }).then(res => {
+      console.log(res);
+    })
+      .catch(error => {
+        console.log(error);
+      });
+
+
     const headings = [
       [
         "First Name",
@@ -38,33 +54,28 @@ function ChooseFileComponent() {
     const wb = utils.book_new();
     const ws = utils.json_to_sheet([]);
     utils.sheet_add_aoa(ws, headings);
-    utils.sheet_add_json(ws, people, { origin: "A2", skipHeader: true });
+    utils.sheet_add_json(ws, excel, { origin: "A2", skipHeader: true });
     utils.book_append_sheet(wb, ws, "Report");
     writeFile(wb, "Inmate Report.csv");
   }
 
   return (
     <div>
-      <div className="custom-file">
-        <input
-          type="file"
-          name="file"
-          className="custom-file-input"
-          id="inputGroupFile"
-          required
-          onChange={handleImport}
-          accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-        />
-        <label className="custom-file-label" htmlFor="inputGroupFile"></label>
+      <div className="container">
+        <div className="row">
+          <form onSubmit={handleDownload} enctype="multipart/form-data">
+            <div className="form-group">
+              <input type="file" name="file" onChange={handleImport} />
+            </div>
+            <div className="form-group">
+              <button className="btn btn-primary" type="submit">Upload</button>
+              <p>Note of incompleteness: the "upload" button currently sends a call to Postman 
+                and downloads an unchanged CSV file.</p>
+            </div>
+          </form>
+        </div>
       </div>
-      <div>
-        <button
-          onClick={handleDownload}
-          className="btn btn-primary float-right"
-        >
-          Download as CSV<i className="fa fa-download"></i>
-        </button>
-      </div>
+
       <div>
         <table className="table">
           <thead>
@@ -78,15 +89,11 @@ function ChooseFileComponent() {
               <th scope="col">City</th>
               <th scope="col">State</th>
               <th scope="col">Zip Code</th>
-              {/* <th scope="col">Found in Inmate Search?</th>
-                            <th scope="col">Same Address?</th>
-                            <th scope="col">New Prison Name</th>
-                            <th scope="col">New Prison Address</th> */}
             </tr>
           </thead>
-          <tbody>
-            {people.length ? (
-              people.map((person, index) => (
+          <tbody className="max-height">
+            {excel.length ? (
+              excel.map((person, index) => (
                 <tr key={index}>
                   <th scope="row">{index + 1}</th>
                   <td>{person.Fname}</td>
@@ -97,21 +104,18 @@ function ChooseFileComponent() {
                   <td>{person.CITY}</td>
                   <td>{person.STATE}</td>
                   <td>{person.ZIP}</td>
-                  {/* <td>{ person.Found_in_Inmate_Search}</td>
-                                        <td>{ person.Same_Address}</td>
-                                        <td>{ person.New_Prison_Name}</td>
-                                        <td>{ person.New_Prison_Address}</td>  */}
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="5" className="text-center">
+                <td colSpan="2" className="text-center">
                   No Data.
                 </td>
               </tr>
             )}
           </tbody>
         </table>
+        <br />
       </div>
     </div>
   );

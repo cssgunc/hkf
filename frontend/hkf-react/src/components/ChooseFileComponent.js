@@ -5,6 +5,7 @@ import { read, utils, write, writeFile } from "xlsx";
 function ChooseFileComponent() {
   const [people, setPeople] = useState([]);
   const [excel, setExcel] = useState([]);
+  const [newExcel, setNewExcel] = useState([]);
 
   function handleImport(event) {
     setPeople(event.target.files[0]);
@@ -32,7 +33,9 @@ function ChooseFileComponent() {
     formData.append('profileImg', people);
     axios.post('https://8ed818d6-4b3c-405d-b4d8-0c3dae7eec19.mock.pstmn.io/post', formData, {
     }).then(res => {
-      console.log(res);
+      console.log(res.data);
+      // IN PROGRESS, convert result to excel for download
+      // setNewExcel(res.data);
     })
       .catch(error => {
         console.log(error);
@@ -65,7 +68,13 @@ function ChooseFileComponent() {
         <div className="row">
           <form onSubmit={handleDownload} enctype="multipart/form-data">
             <div className="form-group">
-              <input type="file" name="file" onChange={handleImport} />
+              <input 
+                type="file" 
+                name="file" 
+                onChange={handleImport} 
+                accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                required
+                />
             </div>
             <div className="form-group">
               <button className="btn btn-primary" type="submit">Upload</button>

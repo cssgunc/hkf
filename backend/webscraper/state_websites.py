@@ -80,7 +80,10 @@ class TexasWebsite(StateWebsite):
             return []
 
         # pull data from landing page
-        rows = landing_page.find("table", {"class": "tdcj_table"}).find_all("tr")
+        table = landing_page.find("table", {"class": "tdcj_table"})
+        if table is None:
+            return []
+        rows = table.find_all("tr")
         results = []
         for row in rows:
             row_data = row.find_all("td")

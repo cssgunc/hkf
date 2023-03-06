@@ -7,13 +7,15 @@ import urllib3
 http = urllib3.PoolManager()
 
 
-# constructs response
-def construct_response(prison_name: str, prison_address: str, old_prison_address: str) -> dict[str, type: str]:
-    return {
-        "address_changed": "false" if prison_address.lower() == old_prison_address.lower() else "true",
-        "prison_name": prison_name,
-        "prison_address": prison_address
-    }
+# response
+class Response:
+    def __init__(self, prison_name: str, prison_address: str, old_prison_address: str):
+        self.address_changed = prison_address.lower() != old_prison_address.lower()
+        self.prison_name = prison_name
+        self.prison_address = prison_address
+
+    def __str__(self):
+        return f"Response(address_changed: {self.address_changed}, prison_name: {self.prison_name}, prison_address: {self.prison_address})"
 
 
 # handles queries to a specific state website
@@ -74,7 +76,7 @@ class TexasWebsite(StateWebsite):
             self.unit_address[data[0].text.strip().lower()] = data[1].text.strip()
         print(self.unit_address)
 
-    def query(self, data: dict[str, type: str]) -> list[type: dict[str, type: str]]:
+    def query(self, data: dict[str, type: str]) -> list[type: Response]:
         landing_page = super().query_post(data)
         if landing_page is None:
             return []
@@ -91,7 +93,7 @@ class TexasWebsite(StateWebsite):
                 continue
             unit = row_data[5].text.strip().lower()
             address = self.unit_address[unit] if unit in self.unit_address.keys() else f"UNIT: {unit} (unknown address)"
-            results.append(construct_response(f"{unit.upper()} UNIT", address, data["add1"]))
+            results.append(Response(f"{unit.upper()} UNIT", address, data["add1"]))
 
         return results
 

@@ -3,13 +3,15 @@ import os.path
 from bs4 import BeautifulSoup
 import typing
 import urllib3
-from state_websites import state_websites
+from state_websites import state_websites, Response
+from csv_handler import CSVHandler
 
 http = urllib3.PoolManager()
-
+output_csv = CSVHandler("output")
+output_csv.add_row(["Fname", "Lname", "InmateID", "PrisonName", "ADD1", "City", "State", "ZIP", "Found in Inmate Search", "Same Address", "New Prison Name", "New Prison Address"])
 
 # runs a query using data from csv
-def query(first_name: str, last_name: str, inmate_id: str, prison_name: str, add1: str, city: str, state: str, zip: str) -> dict | None:
+def query(first_name: str, last_name: str, inmate_id: str, prison_name: str, add1: str, city: str, state: str, zip: str) -> None:
     # get state-specific website
     website = state_websites[state]
 
@@ -19,11 +21,15 @@ def query(first_name: str, last_name: str, inmate_id: str, prison_name: str, add
 
     # query
     print(f"SENT QUERY {query_data}")
-    results = website.query(query_data)
-    print(f"QUERY RESULTS {results}")
+    responses: list[Response] = website.query(query_data)
+    res_str = list(map(lambda r: str(r), responses))
+    print(f"QUERY RESULTS {res_str}")
 
-    # return results
-    return results
+    # store result in csv
+    csv_row = [first_name, last_name, inmate_id, prison_name, add1, city, state, zip, len(responses) != 0]
+    if len(responses) > 0:
+        csv_row.extend([responses[0].address_changed, responses[0].prison_name, responses[0].prison_address])
+    output_csv.add_row(csv_row)
 
 
 # TEST CODE

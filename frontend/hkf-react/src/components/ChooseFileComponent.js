@@ -35,6 +35,7 @@ function ChooseFileComponent() {
     e.preventDefault();
     const formData = new FormData();
     formData.append('profileImg', people);
+    //replace temporary Postman POST request with API call
     axios.post('https://8ed818d6-4b3c-405d-b4d8-0c3dae7eec19.mock.pstmn.io/post', formData, {
     }).then(res => {
       console.log("Successfully sent POST request to Postman: ", res.data.data);
@@ -58,6 +59,7 @@ function ChooseFileComponent() {
       utils.sheet_add_json(ws, newExcel, { origin: "A2", skipHeader: true });
       utils.book_append_sheet(wb, ws, "Report");
       writeFile(wb, "Report.xlsx");
+      setStatus("downloaded");
     });
   }
 

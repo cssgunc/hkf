@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import axios from 'axios';
 import { read, utils, write, writeFile } from "xlsx";
+import './ChooseFileComponent.css';
 
 function ChooseFileComponent() {
-  const [people, setPeople] = useState([]);
-  const [excel, setExcel] = useState([]);
-  const [newExcel, setNewExcel] = useState([]);
+  const [people, setPeople] = useState([]); //original excel file uploaded by user
+  const [excel, setExcel] = useState([]); //displays uploaded file (NOTE: change to preview)
+  const [newExcel, setNewExcel] = useState([]); //should store new file returned by API
+  const [status, setStatus] = useState(''); //process status
 
+  //accepts an xlsx file for API call; also generates preview on site
   function handleImport(event) {
     setPeople(event.target.files[0]);
 
@@ -27,65 +30,64 @@ function ChooseFileComponent() {
     }
   }
 
-  function handleDownload(e) {
+  //sends a POST request with Excel file, currently to Postman
+  function handleRequest(e) {
     e.preventDefault();
     const formData = new FormData();
     formData.append('profileImg', people);
     axios.post('https://8ed818d6-4b3c-405d-b4d8-0c3dae7eec19.mock.pstmn.io/post', formData, {
     }).then(res => {
-      console.log(res.data);
-      // IN PROGRESS, convert result to excel for download
-      // setNewExcel(res.data);
+      console.log("Successfully sent POST request to Postman: ", res.data.data);
+      // console.log(excel);
+      setNewExcel(res.data.data);
+      setStatus("complete");
     })
-      .catch(error => {
-        console.log(error);
-      });
+  }
 
-
-    const headings = [
-      [
-        "First Name",
-        "Last Name",
-        "Inmate ID",
-        "Prison Name",
-        "Address 1",
-        "City",
-        "State",
-        "Zip Code",
-      ],
-    ];
-    const wb = utils.book_new();
-    const ws = utils.json_to_sheet([]);
-    utils.sheet_add_aoa(ws, headings);
-    utils.sheet_add_json(ws, excel, { origin: "A2", skipHeader: true });
-    utils.book_append_sheet(wb, ws, "Report");
-    writeFile(wb, "Inmate Report.csv");
+  //sends a GET request to Postman
+  //SHOULD return an Excel file for download when calling the actual API
+  function handleExport() {
+    //temporary Postman GET request to get changed Excel file
+    axios.get('https://8ed818d6-4b3c-405d-b4d8-0c3dae7eec19.mock.pstmn.io/get', {
+      method: 'GET'
+    }).then((response) => {
+      //GET request SHOULD return an Excel file here and then call setNewExcel() to set the value of newExcel
+      //The following takes newExcel, which is an Excel sheet, and downloads it
+      const wb = utils.book_new();
+      const ws = utils.json_to_sheet([]);
+      utils.sheet_add_json(ws, newExcel, { origin: "A2", skipHeader: true });
+      utils.book_append_sheet(wb, ws, "Report");
+      writeFile(wb, "Report.xlsx");
+    });
   }
 
   return (
-    <div>
-      <div className="container">
-        <div className="row">
-          <form onSubmit={handleDownload} enctype="multipart/form-data">
-            <div className="form-group">
-              <input 
-                type="file" 
-                name="file" 
-                onChange={handleImport} 
-                accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
-                required
-                />
-            </div>
-            <div className="form-group">
-              <button className="btn btn-primary" type="submit">Upload</button>
-              <p>Note of incompleteness: the "upload" button currently sends a call to Postman 
-                and downloads an unchanged CSV file.</p>
-            </div>
-          </form>
-        </div>
+    <div className="wrapper">
+      <div className="form">
+        <form onSubmit={handleRequest} encType="multipart/form-data">
+          <div className="form-group">
+            <input
+              type="file"
+              name="file"
+              onChange={handleImport}
+              accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+              required
+            />
+          </div>
+          <div className="form-group">
+            <button className="btn btn-primary" type="submit">Find Addresses</button>
+          </div>
+        </form>
       </div>
 
-      <div>
+      <div className="status">
+        <label for="change-status">Status: </label>
+        <input type="text" id="change-status" value={status} readOnly></input>
+        <button className="tab" onClick={handleExport}>Download New File</button>
+      </div>
+
+      {/* the following div contains a preview of the uploaded excel sheet--probably clutters too much and will be removed */}
+      <div className="preview">
         <table className="table">
           <thead>
             <tr>
@@ -117,8 +119,8 @@ function ChooseFileComponent() {
               ))
             ) : (
               <tr>
-                <td colSpan="2" className="text-center">
-                  No Data.
+                <td colSpan="8" className="low-opacity">
+                  A preview of your spreadsheet will be shown here.
                 </td>
               </tr>
             )}

@@ -9,8 +9,15 @@ http = urllib3.PoolManager()
 
 # response
 class Response:
+    def address_match(self, add1, add2) -> bool:
+        add1 = add1.strip().lower()
+        add2 = add2.strip().lower()
+        if add1 == "" or add2 == "":
+            return add1 == add2 == ""
+        return add1 == add2 or add1 in add2 or add2 in add1
+
     def __init__(self, prison_name: str, prison_address: str, old_prison_address: str):
-        self.address_changed = prison_address.lower() != old_prison_address.lower()
+        self.address_changed = not self.address_match(prison_address, old_prison_address)
         self.prison_name = prison_name
         self.prison_address = prison_address
 

@@ -7,6 +7,13 @@ import urllib3
 http = urllib3.PoolManager()
 
 
+# query
+class Query:
+    def __init__(self, first_name: str, last_name: str, inmate_id: str, prison_name: str, add1: str, city: str, state: str, zip: str):
+        self.data = {"first_name": first_name, "last_name": last_name, "inmate_id": inmate_id, "prison_name": prison_name,
+            "add1": add1, "city": city, "state": state, "zip": zip}
+
+
 # response
 class Response:
     def address_match(self, add1, add2) -> bool:
@@ -41,12 +48,12 @@ class StateWebsite(object):
 
     # inputs data into website and submits, landing on response page
     # can be overridden if needed
-    def query_post(self, data: dict[str, type: str]) -> BeautifulSoup | None:
+    def query_post(self, query: Query) -> BeautifulSoup | None:
         # input fields
         fields = {}
-        for name in data.keys():
+        for name in query.data.keys():
             if name in self.input_map.keys():
-                fields[self.input_map[name]] = data[name]
+                fields[self.input_map[name]] = query.data[name]
 
         # post
         post_resp = http.request('POST', self.url + "/" + self.post_ext, fields=fields)
@@ -55,7 +62,7 @@ class StateWebsite(object):
     # handles full query + parsing response
     # should call query_post first to get response landing page
     @abstractmethod
-    def query(self, data: dict[str, type: str]):
+    def query(self, query: Query):
         pass
 
 
@@ -83,8 +90,8 @@ class TexasWebsite(StateWebsite):
             self.unit_address[data[0].text.strip().lower()] = data[1].text.strip()
         print(self.unit_address)
 
-    def query(self, data: dict[str, type: str]) -> list[type: Response]:
-        landing_page = super().query_post(data)
+    def query(self, query: Query) -> list[type: Response]:
+        landing_page = super().query_post(query)
         if landing_page is None:
             return []
 
@@ -100,7 +107,7 @@ class TexasWebsite(StateWebsite):
                 continue
             unit = row_data[5].text.strip().lower()
             address = self.unit_address[unit] if unit in self.unit_address.keys() else f"UNIT: {unit} (unknown address)"
-            results.append(Response(f"{unit.upper()} UNIT", address, data["add1"]))
+            results.append(Response(f"{unit.upper()} UNIT", address, query.data["add1"]))
 
         return results
 

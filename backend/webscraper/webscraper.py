@@ -22,10 +22,8 @@ class QueryThread (threading.Thread):
 
     def run(self):
         website = state_websites[self.query.data["state"]]
-        print(f"SENT QUERY {self.query.data}")
         self.responses = website.query(self.query)
         res_str = list(map(lambda r: str(r), self.responses))
-        print(f"QUERY RESULTS {res_str}")
 
 
 # runs a list of queries, exports as csv
@@ -44,46 +42,3 @@ def handle_queries(queries: list[Query]) -> None:
         if len(t.responses) > 0:
             csv_row.extend([t.responses[0].address_changed, t.responses[0].prison_name, t.responses[0].prison_address])
         output_csv.add_row(csv_row)
-
-
-# TEST CODE
-print(f"STARTED {os.path.basename(__file__)}")
-test_queries = [
-    Query("CHRISTOPHER", "ALEMAN", "868445", "BILL CLEMENTS UNIT", "9601 SPUR 591", "AMARILLO", "TX", "79107"),
-    Query("NATHANIEL", "AVILA", "862150", "PACK UNIT", "2400 WALLACE PACK RD", "NAVASOTA", "TX", "77868-4567"),
-    Query("ANTONIO", "GOMEZ", "929416", "BETO UNIT", "1391 FM 3328, Tennessee Colony, TX 75880", "TENNESSEE COLONY", "TX", "75880"),
-    Query("SAM", "LEOS", "410726", "HUGHES UNIT", "RT 2  BOX 4400", "GATESVILLE", "TX", "76597-0099"),
-    Query("CHRISTOPHER", "ALEMAN", "868445", "BILL CLEMENTS UNIT", "9601 SPUR 591", "AMARILLO", "TX", "79107"),
-    Query("NATHANIEL", "AVILA", "862150", "PACK UNIT", "2400 WALLACE PACK RD", "NAVASOTA", "TX", "77868-4567"),
-    Query("ANTONIO", "GOMEZ", "929416", "BETO UNIT", "1391 FM 3328, Tennessee Colony, TX 75880", "TENNESSEE COLONY", "TX", "75880"),
-    Query("SAM", "LEOS", "410726", "HUGHES UNIT", "RT 2  BOX 4400", "GATESVILLE", "TX", "76597-0099"),
-    Query("CHRISTOPHER", "ALEMAN", "868445", "BILL CLEMENTS UNIT", "9601 SPUR 591", "AMARILLO", "TX", "79107"),
-    Query("NATHANIEL", "AVILA", "862150", "PACK UNIT", "2400 WALLACE PACK RD", "NAVASOTA", "TX", "77868-4567"),
-    Query("ANTONIO", "GOMEZ", "929416", "BETO UNIT", "1391 FM 3328, Tennessee Colony, TX 75880", "TENNESSEE COLONY", "TX", "75880"),
-    Query("SAM", "LEOS", "410726", "HUGHES UNIT", "RT 2  BOX 4400", "GATESVILLE", "TX", "76597-0099"),
-    Query("CHRISTOPHER", "ALEMAN", "868445", "BILL CLEMENTS UNIT", "9601 SPUR 591", "AMARILLO", "TX", "79107"),
-    Query("NATHANIEL", "AVILA", "862150", "PACK UNIT", "2400 WALLACE PACK RD", "NAVASOTA", "TX", "77868-4567"),
-    Query("ANTONIO", "GOMEZ", "929416", "BETO UNIT", "1391 FM 3328, Tennessee Colony, TX 75880", "TENNESSEE COLONY", "TX", "75880"),
-    Query("SAM", "LEOS", "410726", "HUGHES UNIT", "RT 2  BOX 4400", "GATESVILLE", "TX", "76597-0099"),
-    Query("CHRISTOPHER", "ALEMAN", "868445", "BILL CLEMENTS UNIT", "9601 SPUR 591", "AMARILLO", "TX", "79107"),
-    Query("NATHANIEL", "AVILA", "862150", "PACK UNIT", "2400 WALLACE PACK RD", "NAVASOTA", "TX", "77868-4567"),
-    Query("ANTONIO", "GOMEZ", "929416", "BETO UNIT", "1391 FM 3328, Tennessee Colony, TX 75880", "TENNESSEE COLONY", "TX", "75880"),
-    Query("SAM", "LEOS", "410726", "HUGHES UNIT", "RT 2  BOX 4400", "GATESVILLE", "TX", "76597-0099"),
-    Query("CHRISTOPHER", "ALEMAN", "868445", "BILL CLEMENTS UNIT", "9601 SPUR 591", "AMARILLO", "TX", "79107"),
-    Query("NATHANIEL", "AVILA", "862150", "PACK UNIT", "2400 WALLACE PACK RD", "NAVASOTA", "TX", "77868-4567"),
-    Query("ANTONIO", "GOMEZ", "929416", "BETO UNIT", "1391 FM 3328, Tennessee Colony, TX 75880", "TENNESSEE COLONY", "TX", "75880"),
-    Query("SAM", "LEOS", "410726", "HUGHES UNIT", "RT 2  BOX 4400", "GATESVILLE", "TX", "76597-0099"),
-    Query("CHRISTOPHER", "ALEMAN", "868445", "BILL CLEMENTS UNIT", "9601 SPUR 591", "AMARILLO", "TX", "79107"),
-    Query("NATHANIEL", "AVILA", "862150", "PACK UNIT", "2400 WALLACE PACK RD", "NAVASOTA", "TX", "77868-4567"),
-    Query("ANTONIO", "GOMEZ", "929416", "BETO UNIT", "1391 FM 3328, Tennessee Colony, TX 75880", "TENNESSEE COLONY", "TX", "75880"),
-    Query("SAM", "LEOS", "410726", "HUGHES UNIT", "RT 2  BOX 4400", "GATESVILLE", "TX", "76597-0099"),
-    Query("CHRISTOPHER", "ALEMAN", "868445", "BILL CLEMENTS UNIT", "9601 SPUR 591", "AMARILLO", "TX", "79107"),
-    Query("NATHANIEL", "AVILA", "862150", "PACK UNIT", "2400 WALLACE PACK RD", "NAVASOTA", "TX", "77868-4567"),
-    Query("ANTONIO", "GOMEZ", "929416", "BETO UNIT", "1391 FM 3328, Tennessee Colony, TX 75880", "TENNESSEE COLONY", "TX", "75880"),
-    Query("SAM", "LEOS", "410726", "HUGHES UNIT", "RT 2  BOX 4400", "GATESVILLE", "TX", "76597-0099"),
-    Query("CHRISTOPHER", "ALEMAN", "868445", "BILL CLEMENTS UNIT", "9601 SPUR 591", "AMARILLO", "TX", "79107"),
-    Query("NATHANIEL", "AVILA", "862150", "PACK UNIT", "2400 WALLACE PACK RD", "NAVASOTA", "TX", "77868-4567"),
-    Query("ANTONIO", "GOMEZ", "929416", "BETO UNIT", "1391 FM 3328, Tennessee Colony, TX 75880", "TENNESSEE COLONY", "TX", "75880"),
-    Query("SAM", "LEOS", "410726", "HUGHES UNIT", "RT 2  BOX 4400", "GATESVILLE", "TX", "76597-0099"),
-]
-handle_queries(test_queries)

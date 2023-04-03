@@ -45,21 +45,19 @@ function ChooseFileComponent() {
     })
   }
 
-  //sends a GET request to Postman
-  //SHOULD return an Excel file for download when calling the actual API
+  //sends a POST request to Postman to receive back an Excel file and download it
   function handleExport() {
-    //temporary Postman GET request to get changed Excel file
-    axios.get('https://8ed818d6-4b3c-405d-b4d8-0c3dae7eec19.mock.pstmn.io/get', {
-      method: 'GET'
+    axios.post('https://8ed818d6-4b3c-405d-b4d8-0c3dae7eec19.mock.pstmn.io/post', {
+      method: 'GET',
+      responseType: 'blob'
     }).then((response) => {
-      //GET request SHOULD return an Excel file here and then call setNewExcel() to set the value of newExcel
-      //The following takes newExcel, which is an Excel sheet, and downloads it
-      const wb = utils.book_new();
-      const ws = utils.json_to_sheet([]);
-      utils.sheet_add_json(ws, newExcel, { origin: "A2", skipHeader: true });
-      utils.book_append_sheet(wb, ws, "Report");
-      writeFile(wb, "Report.xlsx");
-      setStatus("downloaded");
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', `${Date.now()}.xlsx`);
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
     });
   }
 

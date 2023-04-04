@@ -48,25 +48,28 @@ function ChooseFileComponent() {
 
   //API CALL HERE
   function handleExport() {
-    fetch('http://127.0.0.1:5000/download') 
-      .then(function(response) {
-        console.log(response);
-      })
-    // axios.get('http://127.0.0.1:5000/download', {
-    //   method: 'GET',
-    //   responseType: 'blob'
-    // }).then((response) => {
-    //   console.log(response.data.data);
-    //   var blob = new Blob([response.data.data], {type: "octet/stream"});
-    //   const url = window.URL.createObjectURL(blob);
-    //   // const url = window.URL.createObjectURL(new Blob([response.data]));
-    //   const link = document.createElement('a');
-    //   link.href = url;
-    //   link.setAttribute('download', `${Date.now()}.xlsx`);
-    //   document.body.appendChild(link);
-    //   link.click();
-    //   link.remove();
-    // });
+    const link = document.createElement('a');
+    link.href = 'http://127.0.0.1:5000/download';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+
+    // fetch('http://127.0.0.1:5000/download', {
+    //   mode: "cors",
+    //   credentials: "include"
+    // })
+    //   .then((response) => {
+    //     console.log("hello there: ", response.url);
+    //     var blob = new Blob([response.url]);
+    //     const url = window.URL.createObjectURL(blob);
+    //     // const url = window.URL.createObjectURL(new Blob([response.data]));
+    //     const link = document.createElement('a');
+    //     link.href = response.url;
+    //     link.setAttribute('download', `${Date.now()}.xlsx`);
+    //     document.body.appendChild(link);
+    //     link.click();
+    //     link.remove();
+    //   });
   }
 
   //old version of exporting changed Excel file

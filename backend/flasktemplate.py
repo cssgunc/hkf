@@ -12,6 +12,9 @@ def download_excel():
     response.headers['Content-Type'] = 'application/vnd.ms-excel'
     # Set the file name and attachment disposition
     response.headers['Content-Disposition'] = 'attachment; filename="test.xlsx"'
+    response.headers['Access-Control-Allow-Origin'] = 'http://localhost:3000'
+    response.headers['Access-Control-Allow-Methods'] = 'GET'
+    response.headers['Access-Control-Allow-Credentials'] = 'true'
     # Open the file and read its contents
     with open(file_path, 'rb') as f:
         file_contents = f.read()

@@ -1,22 +1,22 @@
-from flask import Flask, request, Response,send_file
-import numpy as np
-from flask_cors import CORS
-import base64
-import cv2
-from PIL import Image
-from matplotlib import pyplot
-from matplotlib.patches import Rectangle
-from mtcnn.mtcnn import MTCNN
+import os
+from flask import Flask, request, Response,send_file, jsonify, render_template
 
 app = Flask(__name__)
-CORS(app)
 
-
-@app.route('/upload', methods=['POST'])
-def fileUpload():
-    processedImage = request.files['image'].read()
-
-    return "Hello World"
+@app.route('/download', methods=['GET'])
+def download_excel():
+    # Get the path of the Excel file
+    file_path = os.path.join(os.getcwd(), "test.xlsx")
+    # Set the output file's content type to Excel
+    response = Response()
+    response.headers['Content-Type'] = 'application/vnd.ms-excel'
+    # Set the file name and attachment disposition
+    response.headers['Content-Disposition'] = 'attachment; filename="test.xlsx"'
+    # Open the file and read its contents
+    with open(file_path, 'rb') as f:
+        file_contents = f.read()
+        response.set_data(file_contents)
+    return response
 
 if __name__ == '__main__':
     app.run()

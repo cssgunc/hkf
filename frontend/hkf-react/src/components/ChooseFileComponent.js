@@ -5,8 +5,7 @@ import './ChooseFileComponent.css';
 
 function ChooseFileComponent() {
   const [people, setPeople] = useState([]); //original excel file uploaded by user
-  const [excel, setExcel] = useState([]); //displays uploaded file (NOTE: change to preview)
-  const [newExcel, setNewExcel] = useState([]); //should store new file returned by API
+  const [excel, setExcel] = useState([]); //displays uploaded file
   const [status, setStatus] = useState(''); //process status
 
   //accepts an xlsx file for API call; also generates preview on site
@@ -30,7 +29,7 @@ function ChooseFileComponent() {
     }
   }
 
-  //sends a POST request with Excel file, currently to Postman
+  //sends a POST request with the uploaded Excel file, currently to Postman
   function handleRequest(e) {
     e.preventDefault();
     const formData = new FormData();
@@ -38,59 +37,22 @@ function ChooseFileComponent() {
     //replace temporary Postman POST request with API call
     axios.post('https://8ed818d6-4b3c-405d-b4d8-0c3dae7eec19.mock.pstmn.io/post?test=101', formData, {
     }).then(res => {
+      //testing to confirm Excel data was sent
       console.log("Successfully sent POST request to Postman: ", res.data.data);
-      // console.log(excel);
-      setNewExcel(res.data.data);
+      //change status bar to 'complete'
       setStatus("complete");
     })
   }
 
 
-  //API CALL HERE
+  //sends a GET request to receive an updated Excel file and download it
   function handleExport() {
     const link = document.createElement('a');
-    link.href = 'http://127.0.0.1:5000/download';
+    link.href = 'http://127.0.0.1:5000/download'; //API call
     document.body.appendChild(link);
     link.click();
     link.remove();
-
-    // fetch('http://127.0.0.1:5000/download', {
-    //   mode: "cors",
-    //   credentials: "include"
-    // })
-    //   .then((response) => {
-    //     console.log("hello there: ", response.url);
-    //     var blob = new Blob([response.url]);
-    //     const url = window.URL.createObjectURL(blob);
-    //     // const url = window.URL.createObjectURL(new Blob([response.data]));
-    //     const link = document.createElement('a');
-    //     link.href = response.url;
-    //     link.setAttribute('download', `${Date.now()}.xlsx`);
-    //     document.body.appendChild(link);
-    //     link.click();
-    //     link.remove();
-    //   });
   }
-
-  //old version of exporting changed Excel file
-  // //sends a POST request to Postman to receive back an Excel file and download it
-  // function handleExport() {
-  //   axios.post('https://8ed818d6-4b3c-405d-b4d8-0c3dae7eec19.mock.pstmn.io/post', {
-  //     method: 'GET',
-  //     responseType: 'blob'
-  //   }).then((response) => {
-  //     console.log(response.data.data);
-  //     var blob = new Blob([response.data.data], {type: "octet/stream"});
-  //     const url = window.URL.createObjectURL(blob);
-  //     // const url = window.URL.createObjectURL(new Blob([response.data]));
-  //     const link = document.createElement('a');
-  //     link.href = url;
-  //     link.setAttribute('download', `${Date.now()}.xlsx`);
-  //     document.body.appendChild(link);
-  //     link.click();
-  //     link.remove();
-  //   });
-  // }
 
   return (
     <div className="wrapper">
@@ -117,7 +79,7 @@ function ChooseFileComponent() {
         <button className="tab" onClick={handleExport}>Download New File</button>
       </div>
 
-      {/* the following div contains a preview of the uploaded excel sheet--probably clutters too much and will be removed */}
+      {/* the following div contains a preview of the uploaded excel sheet*/}
       <div className="preview">
         <table className="table">
           <thead>

@@ -1,6 +1,6 @@
 import os
 
-from backend.webscraper.webscraper import handle_queries, Query
+import webscraper
 
 
 # TEST CODE

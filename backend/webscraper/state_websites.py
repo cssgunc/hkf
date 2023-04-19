@@ -5,7 +5,8 @@ from abc import abstractmethod
 
 import urllib3
 
-http = urllib3.PoolManager()
+http = urllib3.PoolManager(cert_reqs="CERT_NONE")
+urllib3.disable_warnings()
 
 
 # query

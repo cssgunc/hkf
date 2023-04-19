@@ -4,8 +4,8 @@ from bs4 import BeautifulSoup
 import typing
 import urllib3
 import threading
-import state_websites
-import csv_handler
+from state_websites import Query, Response, state_websites
+from csv_handler import CSVHandler
 
 http = urllib3.PoolManager()
 output_csv = CSVHandler("output")

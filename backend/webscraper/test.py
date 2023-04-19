@@ -1,6 +1,6 @@
 import os
 
-import webscraper
+from webscraper import Query, handle_queries
 
 
 # TEST CODE

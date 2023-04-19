@@ -1,4 +1,5 @@
 import typing
+from typing import Optional
 from bs4 import BeautifulSoup
 from abc import abstractmethod
 
@@ -40,7 +41,7 @@ class StateWebsite(object):
         self.input_map = input_map
 
     # visits base website
-    def get_page(self) -> str | None:
+    def get_page(self) -> Optional[str]:
         resp = http.request('GET', self.url)
         if resp.status != 200:
             return None
@@ -48,7 +49,7 @@ class StateWebsite(object):
 
     # inputs data into website and submits, landing on response page
     # can be overridden if needed
-    def query_post(self, query: Query) -> BeautifulSoup | None:
+    def query_post(self, query: Query) -> Optional[BeautifulSoup]:
         # input fields
         fields = {}
         for name in query.data.keys():

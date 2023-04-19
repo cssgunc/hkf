@@ -4,6 +4,7 @@ from webscraper import Query, handle_queries
 
 
 # TEST CODE
+# a whole bunch of queries (to test multithreading speedup)
 print(f"STARTED {os.path.basename(__file__)}")
 test_queries = [
     Query("CHRISTOPHER", "ALEMAN", "868445", "BILL CLEMENTS UNIT", "9601 SPUR 591", "AMARILLO", "TX", "79107"),
@@ -53,3 +54,4 @@ test_queries = [
     Query("SAM", "LEOS", "410726", "HUGHES UNIT", "RT 2  BOX 4400", "GATESVILLE", "TX", "76597-0099"),
 ]
 handle_queries(test_queries)
+print("DONE")

@@ -2,7 +2,7 @@ import os.path
 
 from bs4 import BeautifulSoup
 import typing
-import urllib3
+import urllib3 # note: in the future if urllib3 is replaced with requests, use grequests as that can be multithreaded
 import threading
 from state_websites import Query, Response, state_websites
 from csv_handler import CSVHandler
@@ -13,7 +13,7 @@ output_csv.add_row(["Fname", "Lname", "InmateID", "PrisonName", "ADD1", "City", 
 
 lock = threading.Lock()
 
-
+# represents a thread running a single query
 class QueryThread (threading.Thread):
     def __init__(self, query: Query):
         threading.Thread.__init__(self)

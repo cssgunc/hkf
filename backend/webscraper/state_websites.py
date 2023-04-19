@@ -5,7 +5,7 @@ from abc import abstractmethod
 
 import urllib3
 
-http = urllib3.PoolManager(cert_reqs="CERT_NONE")
+http = urllib3.PoolManager(cert_reqs="CERT_NONE") # TODO: fix SSL certifications
 urllib3.disable_warnings()
 
 

@@ -63,10 +63,6 @@ function ChooseFileComponent() {
       const work = new Excel.Workbook()
       await work.csv.read(s)
       const buffer = await work.xlsx.writeBuffer()
-      var blob = new Blob([buffer], {type: "application/xlsx"});
-      var objectUrl = URL.createObjectURL(blob);
-      window.open(objectUrl);
-
 
       var a = document.createElement("a");
       document.body.appendChild(a);

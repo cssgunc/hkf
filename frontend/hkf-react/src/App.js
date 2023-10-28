@@ -1,23 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import ChooseFileComponent from "./components/ChooseFileComponent";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div className="app-body">
+        <div className="info">
+          <h1>Human Kindness Foundation | Location Tracker</h1>
+          <h3>Instructions:</h3>
+          <h5>1. Upload a file using the "Choose File" button. The format of this file should be xlsx.</h5>
+          <h5>2. Select "Find Addresses" to get each person's location.</h5>
+          <h5>3. Download the changed file with "Download New File".</h5>
+        </div>
+        <ChooseFileComponent/> <br />
+        <br />
+      </div>
     </div>
   );
 }

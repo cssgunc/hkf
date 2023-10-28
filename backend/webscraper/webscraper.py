@@ -8,8 +8,7 @@ from state_websites import Query, Response, state_websites
 from csv_handler import CSVHandler
 
 http = urllib3.PoolManager()
-output_csv = CSVHandler("output")
-output_csv.add_row(["Fname", "Lname", "InmateID", "PrisonName", "ADD1", "City", "State", "ZIP", "Found in Inmate Search", "Same Address", "New Prison Name", "New Prison Address"])
+
 
 lock = threading.Lock()
 
@@ -26,8 +25,11 @@ class QueryThread (threading.Thread):
         res_str = list(map(lambda r: str(r), self.responses))
 
 
+
 # runs a list of queries, exports as csv
-def handle_queries(queries: list[Query]) -> None:
+def handle_queries(queries: list[Query]) -> str:
+    output_csv = CSVHandler()
+    output_csv.add_row(["Fname", "Lname", "InmateID", "PrisonName", "ADD1", "City", "State", "ZIP", "Found in Inmate Search", "Same Address", "New Prison Name", "New Prison Address"])
     # run query threads
     threads = [QueryThread(q) for q in queries]
     for t in threads:
@@ -42,3 +44,4 @@ def handle_queries(queries: list[Query]) -> None:
         if len(t.responses) > 0:
             csv_row.extend([t.responses[0].address_changed, t.responses[0].prison_name, t.responses[0].prison_address])
         output_csv.add_row(csv_row)
+    return output_csv.line.getvalue()

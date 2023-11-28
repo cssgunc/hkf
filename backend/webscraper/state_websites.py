@@ -3,38 +3,17 @@ from typing import Optional
 from bs4 import BeautifulSoup
 from abc import abstractmethod
 
+import NewYork
+from common import Response
+
+from common import Query
+
 import urllib3
 
 http = urllib3.PoolManager(cert_reqs="CERT_NONE") # TODO: fix SSL certifications
 urllib3.disable_warnings()
 
 
-# query
-class Query:
-    def __init__(self, first_name: str, last_name: str, inmate_id: str, prison_name: str, add1: str, city: str, state: str, zip: str):
-        self.data = {"first_name": first_name, "last_name": last_name, "inmate_id": inmate_id, "prison_name": prison_name,
-            "add1": add1, "city": city, "state": state, "zip": zip}
-
-
-# response
-class Response:
-    # simple check to see if two addresses match
-    def address_match(self, add1, add2) -> bool:
-        add1 = add1.strip().lower()
-        add2 = add2.strip().lower()
-        if add1 == "" or add2 == "":
-            return add1 == add2 == ""
-        return add1 == add2 or add1 in add2 or add2 in add1
-
-    # constructor
-    def __init__(self, prison_name: str, prison_address: str, old_prison_address: str):
-        self.address_changed = not self.address_match(prison_address, old_prison_address)
-        self.prison_name = prison_name
-        self.prison_address = prison_address
-
-    # to_string method for debugging
-    def __str__(self):
-        return f"Response(address_changed: {self.address_changed}, prison_name: {self.prison_name}, prison_address: {self.prison_address})"
 
 
 # handles queries to a specific state website
@@ -121,7 +100,6 @@ class TexasWebsite(StateWebsite):
 
         return results
 
-
 # maps state id to state website
 state_websites = {
     "AL": None,                     # Alabama
@@ -156,7 +134,7 @@ state_websites = {
     "NH": None,                     # New Hampshire
     "NJ": None,                     # New Jersey
     "NM": None,                     # New Mexico
-    "NY": None,                     # New York
+    "NY": NewYork.NewYorkWebsite, # New York
     "NC": None,                     # North Carolina
     "ND": None,                     # North Dakota
     "OH": None,                     # Ohio
@@ -167,7 +145,7 @@ state_websites = {
     "SC": None,                     # South Carolina
     "SD": None,                     # South Dakota
     "TN": None,                     # Tennessee
-    "TX": TexasWebsite(),           # Texas
+    "TX": TexasWebsite,           # Texas
     "UT": None,                     # Utah
     "VT": None,                     # Vermont
     "VA": None,                     # Virginia

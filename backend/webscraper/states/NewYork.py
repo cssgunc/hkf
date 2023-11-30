@@ -143,10 +143,3 @@ class NewYorkWebsite(object):
 
             responses.append(Response(f"{unit.upper()} UNIT", address, query.data["add1"]))
         return responses
-
-
-
-ny = NewYorkWebsite()
-responses = ny.query(Query("DERRICK","ZIEGLER", "91A6171", "", "", "", "", ""))
-for response in responses:
-    print(response)

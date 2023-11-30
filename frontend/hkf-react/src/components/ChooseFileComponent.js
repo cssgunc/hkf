@@ -42,9 +42,12 @@ function ChooseFileComponent() {
 
     const formData = new FormData();
     formData.append('data', parsedSheet);
-    axios.post('/input', formData, {
+    setStatus("loading")
+    fetch('/input', {
+      method: "POST",
+      body: formData
     }).then(async res => {
-      const data = res.data
+      const data = await res.text()
 /*
       var element = document.createElement('a');
       element.setAttribute('href', encodeURIComponent(data));
@@ -73,6 +76,7 @@ function ChooseFileComponent() {
     a.download = "output.xlsx";
     a.click();
     window.URL.revokeObjectURL(url);
+    setStatus("success")
 
     }).catch(err =>{
       console.error(err)

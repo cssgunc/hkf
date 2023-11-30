@@ -3,7 +3,9 @@ from typing import Optional
 from bs4 import BeautifulSoup
 from abc import abstractmethod
 
-import NewYork
+import backend.webscraper.states.NewYork as NewYork
+import backend.webscraper.states.Pennsylvania as Pennsylvania
+
 from common import Response
 
 from common import Query
@@ -134,18 +136,18 @@ state_websites = {
     "NH": None,                     # New Hampshire
     "NJ": None,                     # New Jersey
     "NM": None,                     # New Mexico
-    "NY": NewYork.NewYorkWebsite, # New York
+    "NY": NewYork.NewYorkWebsite(), # New York
     "NC": None,                     # North Carolina
     "ND": None,                     # North Dakota
     "OH": None,                     # Ohio
     "OK": None,                     # Oklahoma
     "OR": None,                     # Oregon
-    "PA": None,                     # Pennsylvania
+    "PA": Pennsylvania.PennsylvaniaWebsite(),# Pennsylvania
     "RI": None,                     # Rhode Island
     "SC": None,                     # South Carolina
     "SD": None,                     # South Dakota
     "TN": None,                     # Tennessee
-    "TX": TexasWebsite,           # Texas
+    "TX": TexasWebsite(),           # Texas
     "UT": None,                     # Utah
     "VT": None,                     # Vermont
     "VA": None,                     # Virginia

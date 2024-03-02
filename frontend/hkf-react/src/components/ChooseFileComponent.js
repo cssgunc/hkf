@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-import axios from 'axios';
-import { read, utils} from "xlsx";
-import * as Excel from "exceljs";
-import {Readable} from 'readable-stream'
+import { read, utils, writeFile} from "xlsx";
 
 import './ChooseFileComponent.css';
 
@@ -47,39 +44,18 @@ function ChooseFileComponent() {
       method: "POST",
       body: formData
     }).then(async res => {
-      const data = await res.text()
-/*
-      var element = document.createElement('a');
-      element.setAttribute('href', encodeURIComponent(data));
-      element.setAttribute('download', 'output.');
-    
-      element.style.display = 'none';
-      document.body.appendChild(element);
-    
-      element.click();
-    
-      document.body.removeChild(element);
-*/
-      const s = new Readable()
-      s.push(data)
-      s.push(null)
-      const work = new Excel.Workbook()
-      await work.csv.read(s)
-      const buffer = await work.xlsx.writeBuffer()
+      const data = await res.json()
+      console.log(data)
+      let ws = utils.json_to_sheet(data);
+      let wb = utils.book_new();
+      utils.book_append_sheet(wb, ws, "people")
 
-      var a = document.createElement("a");
-      document.body.appendChild(a);
-      a.style = "display: none";
-      var blob = new Blob([buffer], {type: "application/xlsx"});
-      let url = window.URL.createObjectURL(blob);
-    a.href = url;
-    a.download = "output.xlsx";
-    a.click();
-    window.URL.revokeObjectURL(url);
-    setStatus("success")
+      writeFile(wb, "output.xlsx")
 
-    }).catch(err =>{
-      console.error(err)
+      setStatus("success")
+
+    }).catch(err => {
+      console.log(err)
       setStatus("error")
     })
   }

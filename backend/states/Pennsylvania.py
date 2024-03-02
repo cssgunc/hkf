@@ -1,13 +1,9 @@
 from bs4 import BeautifulSoup
-import urllib3
 import requests
 import re
-from common import Response
-
-from common import Query
-
-http = urllib3.PoolManager(cert_reqs="CERT_NONE") # TODO: fix SSL certifications
-urllib3.disable_warnings()
+import os
+import json
+from query import Query, PrisonMatch
 
 facilities_url = "https://www.cor.pa.gov/Facilities/StatePrisons/Pages/default.aspx"
 location_url = "https://www.cor.pa.gov"
@@ -21,14 +17,14 @@ def safeHeaders():
 
 
 def fetchFacilities():
-    print("fetching PENN facilities")
+    #print("fetching PENN facilities")
 
     locationLinks = set()
-    resp = http.request('GET', facilities_url)
-    if resp.status != 200:
+    resp = requests.get(facilities_url, verify=False)
+    if resp.status_code != 200:
         raise Exception("location website could not be loaded at url", facilities_url)
 
-    soup = BeautifulSoup(resp.data, 'html.parser')
+    soup = BeautifulSoup(resp.text, 'html.parser')
 
 
     for link in soup.find_all('a'):
@@ -42,16 +38,16 @@ def fetchFacilities():
 
     
 
-    print(str(len(locationLinks)) + " locations found, grabbing addresses...")
+    #print(str(len(locationLinks)) + " locations found, grabbing addresses...")
 
     facilityMap = {}
-    lastlen = 0
+    #lastlen = 0
     for link in locationLinks:
-        resp = http.request('GET', location_url+link)
-        if resp.status != 200:
+        resp = requests.get(location_url+link, verify=False)
+        if resp.status_code != 200:
             continue
         
-        soup = BeautifulSoup(resp.data, 'html.parser')
+        soup = BeautifulSoup(resp.text, 'html.parser')
 
         name = link.removeprefix("/Facilities/StatePrisons/Pages/").removesuffix(".aspx").replace("-", " ").upper()
 
@@ -61,23 +57,35 @@ def fetchFacilities():
         facilityMap[name] = address
 
         out = name + " found"
-        print(out + " " * max(0,lastlen-len(out)), end='\r')
-        lastlen = len(out)
+        #print(out + " " * max(0,lastlen-len(out)), end='\r')
+        #lastlen = len(out)
 
-    print("facility map finished")
-    print(facilityMap)
+    #print("facility map finished")
+    #print(facilityMap)
     return facilityMap
 
 
-class PennsylvaniaWebsite(object):
-    def __init__(self):
-        self.facilityMap = fetchFacilities()
-    def query(self, query: Query) -> list[type: Response]:
+class PennsylvaniaScraper(object):
+    def load(self, use_cache = True):
+        print("initializing Pennsylvania")
+        file_path = "stateCache/Pennsylvania.json"
+        if use_cache and os.path.exists(file_path): # Check if the file exists
+            with open(file_path, 'r') as file:
+                self.facilityMap = json.load(file) # Load data from the JSON file
+            print("initialized Pennsylvania from cache")
+        else:
+            print("initializing Pennsylvania from web")
+            self.facilityMap = fetchFacilities() # Fetch data if file doesn't exist
+            print("initialized Pennsylvania from web")
+            if use_cache:
+                with open(file_path, 'w') as file:
+                    json.dump(self.facilityMap, file, indent=4) # Cache data to file_path
+    def query(self, query: Query) -> list[type: PrisonMatch]:
         responses = []
         data = requests.post("https://captorapi.cor.pa.gov/InmLocAPI/api/v1/InmateLocator/SearchResults", headers=safeHeaders(),
-            json={"id":query.data["inmate_id"],
-                  "firstName":query.data["first_name"],
-                  "lastName":query.data["last_name"],
+            json={"id":query["inmate_id"],
+                  "firstName":query["first_name"],
+                  "lastName":query["last_name"],
                   "middleName":"",
                   "paroleNumber":"",
                   "countylistkey":"---",
@@ -91,10 +99,11 @@ class PennsylvaniaWebsite(object):
         )
         data = data.json()["inmates"]
 
+        print(data)
         
         for match in data:
             unit = match["fac_name"]
             address = self.facilityMap[unit] if unit in self.facilityMap.keys() else f"UNIT: {unit} (unknown address)"
 
-            responses.append(Response(f"{unit.upper()} UNIT", address, query.data["add1"]))
+            responses.append(PrisonMatch.create(f"{unit.upper()} UNIT", address, query["add1"]))
         return responses

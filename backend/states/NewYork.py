@@ -1,12 +1,9 @@
 from bs4 import BeautifulSoup
-import urllib3
 import requests
-from common import Response
-
-from common import Query
-
-http = urllib3.PoolManager(cert_reqs="CERT_NONE") # TODO: fix SSL certifications
-urllib3.disable_warnings()
+from query import Query, PrisonMatch
+from abstractScraper import AbstractStateScraper
+import json
+import os
 
 state_url = "https://doccs.ny.gov/"
 name_query_url = "https://nysdoccslookup.doccs.ny.gov/IncarceratedPerson/SearchByName"
@@ -69,16 +66,16 @@ def fetchName(firstName, lastName):
 #status, facility
 
 def fetchFacilities():
-    print("fetching NY facilities")
+    #print("fetching NY facilities")
 
     locationLinks = set()
     page = 0 
     while(True):
-        resp = http.request('GET', state_url+"facilities?page=" + str(page))
-        if resp.status != 200:
+        resp = requests.get(state_url+"facilities?page=" + str(page))
+        if resp.status_code != 200:
             raise Exception("location website could not be loaded at url", state_url+"facilities?page=" + str(page))
 
-        soup = BeautifulSoup(resp.data, 'html.parser')
+        soup = BeautifulSoup(resp.text, 'html.parser')
 
         prev = len(locationLinks)
 
@@ -96,16 +93,16 @@ def fetchFacilities():
         page += 1
     
 
-    print(str(len(locationLinks)) + " locations found, grabbing addresses...")
+    #print(str(len(locationLinks)) + " locations found, grabbing addresses...")
 
     facilityMap = {}
-    lastlen = 0
+    #lastlen = 0
     for link in locationLinks:
-        resp = http.request('GET', state_url+link)
-        if resp.status != 200:
+        resp = requests.get(state_url+link)
+        if resp.status_code != 200:
             raise Exception("location website could not be loaded at url", state_url+link)
     
-        soup = BeautifulSoup(resp.data, 'html.parser')
+        soup = BeautifulSoup(resp.text, 'html.parser')
 
         name = link.removeprefix("/location/").removesuffix("-correctional-facility")
 
@@ -119,27 +116,39 @@ def fetchFacilities():
         facilityMap[name.replace("-", " ").upper()] = address
 
         out = name + " found"
-        print(out + " " * max(0,lastlen-len(out)), end='\r')
-        lastlen = len(out)
+        #print(out + " " * max(0,lastlen-len(out)), end='\r')
+        #lastlen = len(out)
 
-    print("facility map finished")
-    print(facilityMap)
+    #print("facility map finished")
+    #print(facilityMap)
     return facilityMap
 
 
-class NewYorkWebsite(object):
-    def __init__(self):
-        self.facilityMap = fetchFacilities()
-    def query(self, query: Query) -> list[type: Response]:
+class NewYorkScraper(AbstractStateScraper):
+    def load(self, use_cache = True):
+        print("initializing new york")
+        file_path = "stateCache/NewYork.json"
+        if use_cache and os.path.exists(file_path): # Check if the file exists
+            with open(file_path, 'r') as file:
+                self.facilityMap = json.load(file) # Load data from the JSON file
+            print("initialized new york from cache")
+        else:
+            print("initializing new york from web")
+            self.facilityMap = fetchFacilities() # Fetch data if file doesn't exist
+            print("initialized new york from web")
+            if use_cache:
+                with open(file_path, 'w') as file:
+                    json.dump(self.facilityMap, file, indent=4) # Cache data to file_path
+    def query(self, query: Query) -> list[type: PrisonMatch]:
         responses = []
-        data = fetchDin(query.data["inmate_id"])
+        data = fetchDin(query["inmate_id"])
         if data == None:
-            data = fetchName(query.data["first_name"], query.data["last_name"])
+            data = fetchName(query["first_name"], query["last_name"])
 
         
         for match in data:
             unit = match["facility"]
             address = self.facilityMap[unit] if unit in self.facilityMap.keys() else f"UNIT: {unit} (unknown address)"
 
-            responses.append(Response(f"{unit.upper()} UNIT", address, query.data["add1"]))
+            responses.append(PrisonMatch.create(f"{unit.upper()} UNIT", address, query["add1"]))
         return responses

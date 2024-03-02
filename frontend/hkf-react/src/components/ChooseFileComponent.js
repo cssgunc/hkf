@@ -43,9 +43,8 @@ function ChooseFileComponent() {
     fetch('/input', {
       method: "POST",
       body: formData
-    }).then(async res => {
-      const data = await res.json()
-      console.log(data)
+    }).then(res => res.json())
+    .then(data=>{
       let ws = utils.json_to_sheet(data);
       let wb = utils.book_new();
       utils.book_append_sheet(wb, ws, "people")

@@ -5,7 +5,7 @@
 **Backend Environment**
 1. Install Anaconda if you haven't already (https://www.anaconda.com/download).
     - You can check if you have it installed already by running `conda --version` in the terminal. Alternatively, you can check that `(base)` is before every line in your terminal.
-2. Create the environment by running `conda env create -n hkf -f environment.yaml`. This should create the `hkf` environment in anaconda.
+2. Create the environment by running `conda env create -n hkf -f environment.yml`. This should create the `hkf` environment in anaconda.
 3. Activate the `hkf` environment by running `conda activate hkf`. You will need to do this for every new terminal session.
 
 **Frontend Environment**

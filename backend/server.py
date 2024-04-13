@@ -36,7 +36,7 @@ def handle_input():
                     break
                 except:
                     iters += 1
-                if iters > 10:
+                if iters > 20:
                     break
         except:
             if i == 0:

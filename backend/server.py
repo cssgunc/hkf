@@ -2,6 +2,7 @@ from threading import Thread
 from scraper import Scraper
 from query import Query, PrisonMatch
 import os
+import traceback
 
 from flask import Flask, Response, request
 from flask_cors import CORS
@@ -27,8 +28,11 @@ def handle_input():
     threads = []
 
     def process_query(i, query):
-        queries[i] = scraper.query(query)
-        print('Index', i)
+        try:
+            queries[i] = scraper.query(query)
+        except:
+            if i == 0:
+                traceback.print_exc()
         
     for i in range(len(parsed)):
         thread = Thread(target=process_query, args=(i, parse_query(parsed[i])))

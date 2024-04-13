@@ -61,7 +61,7 @@ class TexasScraper(AbstractStateScraper):
         post_ext = "search"
         fields = {"firstName": query["first_name"], "lastName": query["last_name"]}
 
-        post_resp = requests.post(url + "/" + post_ext, data=fields, headers=headers, verify=False)
+        post_resp = requests.post(url + "/" + post_ext, data=fields, headers=headers)
         return (
             BeautifulSoup(post_resp.text, "html.parser")
             if post_resp.status_code == 200

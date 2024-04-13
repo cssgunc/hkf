@@ -24,8 +24,8 @@ def handle_input():
     threads = []
 
     def process_query(i, query):
-        print('Index', i)
         queries[i] = scraper.query(query)
+        print('Index', i)
         
     for i in range(len(parsed)):
         thread = Thread(target=process_query, args=(i, parse_query(parsed[i])))

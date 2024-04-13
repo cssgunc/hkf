@@ -29,7 +29,12 @@ def handle_input():
 
     def process_query(i, query):
         try:
-            queries[i] = scraper.query(query)
+            iters = 0
+            while queries[i] is None:
+                queries[i] = scraper.query(query)
+                iters += 1
+                if iters > 10:
+                    break
         except:
             if i == 0:
                 traceback.print_exc()

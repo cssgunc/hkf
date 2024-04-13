@@ -1,6 +1,7 @@
 from threading import Thread
 from scraper import Scraper
 from query import Query, PrisonMatch
+import os
 
 from flask import Flask, Response, request
 import json
@@ -49,5 +50,5 @@ def handle_input():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port = 8000, threaded = True, debug = True, use_reloader=False)
+    app.run(port=os.getenv("PORT", default=5000), threaded = True, debug = True, use_reloader=False)
 

@@ -11,7 +11,7 @@ import json
 scraper = Scraper()
 
 app = Flask(__name__)
-CORS(app, origins=["http://localhost:3000"])
+CORS(app, origins=["http://localhost:3000", "https://hkf-location-tracker.vercel.app"])
 
 def parse_query(dict):
     return Query.create(dict['Fname'], dict['Lname'], dict['InmateID'], dict['PrisonName'], dict['ADD1'], dict['CITY'], dict['STATE'], dict['ZIP'])
@@ -49,7 +49,6 @@ def handle_input():
 
     for thread in threads:
         thread.join()
-    print('Queries', queries)
     
     for i in range(len(parsed)):
         if queries[i] is None:

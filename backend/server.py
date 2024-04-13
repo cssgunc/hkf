@@ -45,6 +45,7 @@ def handle_input():
 
     out = json.dumps(parsed)
     response = Response(out, mimetype='application/json')
+    print('Response', response)
     return response
 
 

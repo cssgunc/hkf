@@ -31,8 +31,10 @@ def handle_input():
         try:
             iters = 0
             while queries[i] is None:
-                queries[i] = scraper.query(query)
-                iters += 1
+                try:
+                    queries[i] = scraper.query(query)
+                except:
+                    iters += 1
                 if iters > 10:
                     break
         except:

@@ -4,11 +4,13 @@ from query import Query, PrisonMatch
 import os
 
 from flask import Flask, Response, request
+from flask_cors import CORS
 import json
 
 scraper = Scraper()
 
 app = Flask(__name__)
+CORS(app)
 
 def parse_query(dict):
     return Query.create(dict['Fname'], dict['Lname'], dict['InmateID'], dict['PrisonName'], dict['ADD1'], dict['CITY'], dict['STATE'], dict['ZIP'])

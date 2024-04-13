@@ -24,6 +24,7 @@ def handle_input():
 
     def process_query(i, query):
         queries[i] = scraper.query(query)
+        print(scraper)
     for i in range(len(parsed)):
         thread = Thread(target=process_query, args=(i, parse_query(parsed[i])))
         thread.start()
@@ -31,7 +32,7 @@ def handle_input():
 
     for thread in threads:
         thread.join()
-    
+    print(queries)
     for i in range(len(parsed)):
         if len(queries[i])==0:
             parsed[i].update(PrisonMatch.serialize(PrisonMatch.blank()))

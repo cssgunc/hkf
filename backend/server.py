@@ -50,6 +50,11 @@ def handle_input():
     for thread in threads:
         thread.join()
     print('Queries', queries)
+    
+    for i in range(len(parsed)):
+        if queries[i] is None:
+            queries[i] = []
+    
     for i in range(len(parsed)):
         if len(queries[i])==0:
             parsed[i].update(PrisonMatch.serialize(PrisonMatch.blank()))

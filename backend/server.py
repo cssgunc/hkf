@@ -18,13 +18,14 @@ def handle_input():
     parsed = json.loads(input_str)
 
     print("new input of len: ", len(parsed))
+    print('Scraper', scraper)
 
     queries = [None] * len(parsed)
     threads = []
 
     def process_query(i, query):
         queries[i] = scraper.query(query)
-        print(scraper)
+        
     for i in range(len(parsed)):
         thread = Thread(target=process_query, args=(i, parse_query(parsed[i])))
         thread.start()
@@ -32,7 +33,7 @@ def handle_input():
 
     for thread in threads:
         thread.join()
-    print(queries)
+    print('Queries', queries)
     for i in range(len(parsed)):
         if len(queries[i])==0:
             parsed[i].update(PrisonMatch.serialize(PrisonMatch.blank()))

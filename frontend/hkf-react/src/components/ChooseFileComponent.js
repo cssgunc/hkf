@@ -40,7 +40,7 @@ function ChooseFileComponent() {
     const formData = new FormData();
     formData.append('data', parsedSheet);
     setStatus("loading")
-    fetch('https://hkf-production.up.railway.app/input', {
+    fetch('/input', {
       method: "POST",
       body: formData
     }).then(res => res.json())

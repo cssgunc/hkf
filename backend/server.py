@@ -8,6 +8,8 @@ from flask import Flask, Response, request
 from flask_cors import CORS
 import json
 
+
+
 scraper = Scraper()
 
 app = Flask(__name__)
@@ -53,7 +55,7 @@ def handle_input():
     for i in range(len(parsed)):
         if queries[i] is None:
             queries[i] = []
-    
+    print(queries)
     for i in range(len(parsed)):
         if len(queries[i])==0:
             parsed[i].update(PrisonMatch.serialize(PrisonMatch.blank()))

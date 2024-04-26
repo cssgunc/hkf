@@ -16,7 +16,7 @@ headers = {
 class TexasScraper(AbstractStateScraper):
     def load(self, use_cache=True):
         print("initializing texas")
-        file_path = "stateCache/Texas.json"
+        file_path = "backend/stateCache/Texas.json"
         if use_cache and os.path.exists(file_path):  # Check if the file exists
             with open(file_path, "r") as file:
                 self.unit_address = json.load(file)  # Load data from the JSON file

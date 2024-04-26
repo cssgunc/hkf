@@ -91,7 +91,7 @@ def fetchFacilities():
             break
 
         page += 1
-    
+     
 
     #print(str(len(locationLinks)) + " locations found, grabbing addresses...")
 
@@ -127,7 +127,7 @@ def fetchFacilities():
 class NewYorkScraper(AbstractStateScraper):
     def load(self, use_cache = True):
         print("initializing new york")
-        file_path = "stateCache/NewYork.json"
+        file_path = "backend/stateCache/NewYork.json"
         if use_cache and os.path.exists(file_path): # Check if the file exists
             with open(file_path, 'r') as file:
                 self.facilityMap = json.load(file) # Load data from the JSON file
@@ -149,6 +149,5 @@ class NewYorkScraper(AbstractStateScraper):
         for match in data:
             unit = match["facility"]
             address = self.facilityMap[unit] if unit in self.facilityMap.keys() else f"UNIT: {unit} (unknown address)"
-
             responses.append(PrisonMatch.create(f"{unit.upper()} UNIT", address, query["add1"]))
         return responses

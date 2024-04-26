@@ -1,0 +1,502 @@
+{
+    "X102": [
+        "Apalachee Correctional Institution East (Male): ",
+        "35 Apalachee Drive Sneads, Florida  32460-4166"
+    ],
+    "X101": [
+        "Apalachee Correctional Institution West (Male): ",
+        "52 West Unit Drive Sneads Florida 32460-4165"
+    ],
+    "X112": [
+        "Bay Correctional Facility (Male): ",
+        "5400 Bayline Drive Panama City, Florida 32404-5492"
+    ],
+    "X185": [
+        "Blackwater River Correctional Facility (Male) : ",
+        "5914 Jeff Ates Road Milton, Florida 32583-0000"
+    ],
+    "X105": [
+        "*Calhoun Correctional Institution (Male): ",
+        "19562 SE Institution Drive Blountstown, Florida  32424-5156"
+    ],
+    "X106": [
+        "*Century Correctional Institution (Male): ",
+        "400 Tedder Road Century, Florida  32535-3659"
+    ],
+    "X113": [
+        "*Franklin Correctional Institution (Male) : ",
+        "1760 Highway 67 North Carrabelle, Florida 32322"
+    ],
+    "X111": [
+        "Gadsden Correctional Facility (Female) : ",
+        "6044 Greensboro Highway Quincy, Florida 32351-9100"
+    ],
+    "X159": [
+        "Graceville Correctional and Rehabilitation Facility (Male): ",
+        "5168 Ezell Rd. Graceville, FL 32440"
+    ],
+    "X109": [
+        "Gulf Correctional Institution (Male): ",
+        "500 Ike Steele Road Wewahitchka, Florida 32465-0010"
+    ],
+    "X107": [
+        "*Holmes Correctional Institution (Male) : ",
+        "3142 Thomas Drive Bonifay, Florida 32425-0190"
+    ],
+    "X104": [
+        "*Jackson Correctional Institution (Male): ",
+        "5563 10th Street Malone, Florida 32445-3144"
+    ],
+    "X103": [
+        "Jefferson Correctional Institution (Male): ",
+        "1050 Big Joe Road Monticello, Florida 32344-0430"
+    ],
+    "X120": [
+        "*Liberty Correctional Institution (Male): ",
+        "11064 N.W. Dempsey Barron Road Bristol, Florida 32321-9711"
+    ],
+    "X110": [
+        "Northwest Florida Reception Center (Male): ",
+        "4455 Sam Mitchell Drive Chipley, Florida 32428-3501"
+    ],
+    "X115": [
+        "*Okaloosa Correctional Institution (Male): ",
+        "3189 Colonel Greg Malloy Road Crestview, Florida 32539-6708"
+    ],
+    "X139": [
+        "Quincy Annex (Male): ",
+        "2225 Pat Thomas Parkway Quincy, Florida 32351-8645"
+    ],
+    "X119": [
+        "Santa Rosa Correctional Institution (Male): ",
+        "5850 East Milton Rd. Milton, Florida 32583-7914"
+    ],
+    "X118": [
+        "*Wakulla Correctional Institution (Male): ",
+        "110 Melaleuca Drive Crawfordville, Florida 32327-4963"
+    ],
+    "X279": [
+        "*Baker Correctional Institution (Male): ",
+        "20706 US Highway 90 West Sanderson, Florida  32087-2359"
+    ],
+    "X201": [
+        "*Columbia Correctional Institution (Male): ",
+        "216 S.E. Corrections Way Lake City, Florida  32025-2013"
+    ],
+    "X211": [
+        "*Cross City Correctional Institution (Male): ",
+        "568 NE 255th Street Cross City, Florida  32628"
+    ],
+    "X205": [
+        "*Florida State Prison (Male): ",
+        "Physical Address: 23916 NW 83rd Ave"
+    ],
+    "X215": [
+        "*Hamilton Correctional Institution (Male): ",
+        "10650 SW 46th Street Jasper, Florida 32052-1360"
+    ],
+    "X219": [
+        "Lake City Correctional Facility (Male Youth): ",
+        "7906 East Highway 90 Lake City, Florida 32055-6290"
+    ],
+    "X281": [
+        "*Lancaster Correctional Institution (Male Youth): ",
+        "3449 S.W. State Road 26 Trenton, Florida  32693-5641"
+    ],
+    "X255": [
+        "Lawtey Correctional Institution (Male): ",
+        "22298 NE County Road 200B Lawtey FL\u00a0 32058"
+    ],
+    "X216": [
+        "*Madison Correctional Institution (Male): ",
+        "382 Southwest MCI Way Madison, Florida  32340-4430"
+    ],
+    "X223": [
+        "*Mayo Correctional Institution (Male) : ",
+        "8784 US Highway 27 West Mayo, Florida  32066-3458"
+    ],
+    "X210": [
+        "New River Correctional Institution (Male): ",
+        "8000 NW 80th Place Raiford, FL 32083"
+    ],
+    "X214": [
+        "Putnam Correctional Institution (Male): ",
+        "128 Yelvington Road East Palatka, Florida 32131-2112"
+    ],
+    "X209": [
+        "Reception and Medical Center (Male): ",
+        "7765 S CR 231 Lake Butler, Florida 32054-0628"
+    ],
+    "X230": [
+        "Suwannee Correctional Institution (Male): ",
+        "5964 U.S. Highway 90 Live Oak, Florida 32060"
+    ],
+    "X218": [
+        "*Taylor Correctional Institution (Male): ",
+        "8501 Hampton Springs Road Perry, Florida 32348-8747"
+    ],
+    "X282": [
+        "*Tomoka Correctional Institution (Male): ",
+        "3950 Tiger Bay Road Daytona Beach, Florida  32124-1098"
+    ],
+    "X213": [
+        "Union Correctional Institution (Male): ",
+        "25636 NE SR-16 Raiford, Florida 32083"
+    ],
+    "X503": [
+        "*Avon Park Correctional Institution (Male): ",
+        "8100 Highway 64 East Avon Park, Florida 33825"
+    ],
+    "X320": [
+        "Central Florida Reception Center (Male): ",
+        "7000 H C Kelley Rd Orlando, FL 32831-2518"
+    ],
+    "X564": [
+        "*DeSoto Annex (Male): ",
+        "13617 S.E. Highway 70 Arcadia, Florida  34266-7800"
+    ],
+    "X368": [
+        "*Florida Women's Reception Center: ",
+        "3700 NW 111th Place Ocala, Florida"
+    ],
+    "X501": [
+        "*Hardee Correctional Institution (Male): ",
+        "6901 State Road 62 Bowling Green, Florida 33834-9505"
+    ],
+    "X336": [
+        "Hernando Correctional Institution  (Male): ",
+        "16415 Spring Hill Drive Brooksville, Florida  34604-8167"
+    ],
+    "X312": [
+        "Lake Correctional Institution (Male): ",
+        "19225 U.S. Highway 27 Clermont, Florida 34715-9025"
+    ],
+    "X314": [
+        "Lowell Correctional Institution (Female, Youth): ",
+        "11120 NW Gainesville Rd Ocala, Florida 34482-1479"
+    ],
+    "X304": [
+        "*Marion Correctional Institution (Male): ",
+        "3269 NW 105th Street Ocala, Florida 34475"
+    ],
+    "X508": [
+        "*Polk Correctional Institution (Male): ",
+        "10800 Evans Road Polk City, Florida 33868-6925"
+    ],
+    "X307": [
+        "Sumter Correctional Institution (Male): ",
+        "9544 County Road 476B"
+    ],
+    "X573": [
+        "Zephyrhills Correctional Institution (Male): ",
+        "2739 Gall Boulevard Zephyrhills, Florida 33541-9701"
+    ],
+    "X510": [
+        "Charlotte Correctional Institution (Male): ",
+        "33123 Oil Well Road Punta Gorda, Florida 33955-9701"
+    ],
+    "X463": [
+        "Dade Correctional Institution (Male): ",
+        "19000 S. W. 377th Street Florida City, Florida 33034-6409"
+    ],
+    "X401": [
+        "Everglades Correctional Institution (Male): ",
+        "1599 S.W. 187th Ave. Miami, Florida 33194"
+    ],
+    "X419": [
+        "Homestead Correctional Institution (Female): ",
+        "19000 S. W. 377th Street Florida City, Florida 33034-6409"
+    ],
+    "X430": [
+        "*Martin Correctional Institution (Male): ",
+        "1150 S.W. Allapattah Road Indiantown, Florida  34956-4397"
+    ],
+    "X511": [
+        "Moore Haven Correctional Facility (Male): ",
+        "Post Office Box 719001 Moore Haven, Florida 33471"
+    ],
+    "X404": [
+        "Okeechobee Correctional Institution (Male): ",
+        "3420 N.E. 168th St. Okeechobee, Florida 34972-4824"
+    ],
+    "X405": [
+        "South Bay Correctional Facility (Male): ",
+        "600 U.S. Highway 27, South South Bay, Florida 33493-2233"
+    ],
+    "X402": [
+        "South Florida Reception Center (Male): ",
+        "14000 NW 41st Street Doral, Florida 33178-3003"
+    ],
+    "X144": [
+        "Gadsden Re-Entry Center: ",
+        "630 Opportunity Lane Havana, FL 32333"
+    ],
+    "X275": [
+        "Baker Re-Entry Center: ",
+        "17128 US Highway 90 West Sanderson, Florida 32087"
+    ],
+    "X441": [
+        "Everglades Re-Entry Center: ",
+        "1599 S.W. 187th Avenue Miami, FL 33194"
+    ],
+    "X464": [
+        "Sago Palm Re-Entry Center: ",
+        "500 Bay Bottom Road Pahokee, FL 33476"
+    ],
+    "X165": [
+        "Calhoun Work Camp (Male): ",
+        "19564 SE Inst. Drive Blountstown, Florida 32424-5156"
+    ],
+    "X167": [
+        "Century Work Camp (Male): ",
+        "400 Tedder Road Century, Florida 32535-3659"
+    ],
+    "X160": [
+        "Graceville Work Camp (Male): ",
+        "5230 Ezell Road Graceville, FL 32440-4289"
+    ],
+    "X170": [
+        "Gulf Forestry Camp (Male) : ",
+        "3222 DOC Whitfield Road White City, Florida  32465"
+    ],
+    "X162": [
+        "Holmes Work Camp (Male): ",
+        "3182 Thomas Drive Bonifay, Florida 32425-4238"
+    ],
+    "X166": [
+        "Jackson Work Camp (Male): ",
+        "5607 10th Street Hwy 71 North"
+    ],
+    "X121": [
+        "Liberty Work Camp - South Unit (Male): ",
+        "11064 NW Dempsey Barron Road Bristol, Florida 32321-0711"
+    ],
+    "X161": [
+        "Okaloosa Work Camp (Male): ",
+        "3189 Colonel Greg Malloy Road Crestview, Florida 32539-6708"
+    ],
+    "X127": [
+        "Santa Rosa Work Camp (Male) : ",
+        "5850 East Milton Road Milton, Florida 32583"
+    ],
+    "X173": [
+        "Wakulla Work Camp (Male): ",
+        "110 Melaleuca Drive Crawfordville, FL 32327-4963"
+    ],
+    "Xid": [
+        "Walton Work Camp  (Male): ",
+        "301 Institution Road DeFuniak Springs, Florida 32433-0000"
+    ],
+    "X261": [
+        "Baker Work Camp (Male): ",
+        "20706 US Highway 90 West Sanderson, Florida 32087-2359"
+    ],
+    "X264": [
+        "Columbia Work Camp (Male): ",
+        "216 SE Corrections Way Lake City, Florida 32025"
+    ],
+    "X262": [
+        "Cross City Work Camp (Male): ",
+        "568 N.E. 255th Street Cross City, Florida 32628"
+    ],
+    "X240": [
+        "Gainesville Work Camp (Male) : ",
+        "700 NE 55th Blvd. State Road 26 East"
+    ],
+    "X263": [
+        "Hamilton Work Camp (Male): ",
+        "10650 SW 46th Street Jasper, Florida 32052"
+    ],
+    "X280": [
+        "Lancaster Work Camp (Male): ",
+        "3449 SW SR 26 Trenton, Florida 32693-5641"
+    ],
+    "X289": [
+        "Madison Work Camp (Male): ",
+        "382 SW MCI Way Madison, Florida 32340-4430"
+    ],
+    "x268": [
+        "New River Correctional Work Camp: ",
+        "Post Office Box 900 Raiford, Florida 32083"
+    ],
+    "X221": [
+        "RMC Work Camp (Male): ",
+        "P.O. Box 628 Lake Butler, FL 32054"
+    ],
+    "X232": [
+        "Suwannee Work Camp (Male): ",
+        "5964 US Highway 90 Live Oak, Florida 32060"
+    ],
+    "X227": [
+        "Taylor Work Camp (Male) : ",
+        "8501 Hampton Springs Road Perry, Florida 32348-0000"
+    ],
+    "X284": [
+        "Tomoka Work Camp (Male): ",
+        "3950 Tiger Bay Road Daytona Beach, FL 32124-1098"
+    ],
+    "X504": [
+        "Avon Park Work Camp (Male): ",
+        "8100 Highway 64 East Avon Park, Florida 33825"
+    ],
+    "X560": [
+        "DeSoto Work Camp (Male) : ",
+        "13617 SE Highway 70 Arcadia, FL 34266-0000"
+    ],
+    "X563": [
+        "Hardee Work Camp (Male): ",
+        "6899 State Road 62 Bowling Green, Florida 33834-9505"
+    ],
+    "X552": [
+        "Largo Road Prison (Male) : ",
+        "5201 Ulmerton Road Clearwater, Florida 33760-4006"
+    ],
+    "X316": [
+        "Lowell Work Camp (Female): ",
+        "11120 NW Gainesville Road Ocala, FL 34482-000"
+    ],
+    "X364": [
+        "Marion Work Camp (Male): ",
+        "Post Office Box 158 Lowell, Florida 32663-0158"
+    ],
+    "X562": [
+        "Polk Work Camp (Male): ",
+        "10800 Evans Road Polk City, Florida 33868-6925"
+    ],
+    "X308": [
+        "Sumter Basic Training Unit: ",
+        "9544 County Road 476B Bushnell, Florida  33513-0667"
+    ],
+    "X365": [
+        "Sumter Work Camp (Male): ",
+        "9858 County Road 476B Bushnell, Florida  33513-0667"
+    ],
+    "X544": [
+        "Ft. Myers Work Camp (Male): ",
+        "2575 Ortiz Avenue Fort Myers, Florida 33994-1107"
+    ],
+    "X431": [
+        "Loxahatchee Road Prison (Male) : ",
+        "230 Sunshine Road West Palm Beach, Florida  33411-3616"
+    ],
+    "X420": [
+        "Martin Work Camp (Male): ",
+        "100 SW Allapattah Road Indiantown, Florida  34956-4310"
+    ],
+    "X407": [
+        "Okeechobee Work Camp (Male): ",
+        "4099 N. E. 168th Street Okeechobee, Florida  34972-4824"
+    ],
+    "X163": [
+        "Panama City CRC (Male) : ",
+        "3609 Highway 390 Panama City, Florida  32405-2795"
+    ],
+    "X164": [
+        "Pensacola CRC (Male) : ",
+        "3050 North L. Street Pensacola, Florida  32501-1010"
+    ],
+    "X187": [
+        "SHISA House - West CRC (Female) : ",
+        "418 West Virginia Street Tallahassee, Florida  32301-1030"
+    ],
+    "X168": [
+        "Tallahassee CRC (Male) : ",
+        "2616A Springhill Road Tallahassee, Florida  32305-6739"
+    ],
+    "X249": [
+        "Bridges of Lake City CRC (Male): ",
+        "1099 N.W. Dot Glen Lake City, Florida 32055-2564"
+    ],
+    "X266": [
+        "Bridges of Santa Fe CRC (Male): ",
+        "2901 Northeast 39th Avenue Gainesville, Florida 32602-1202"
+    ],
+    "X355": [
+        "Tomoka  CRC (Male): ",
+        "3601 U.S. Highway 92 West Daytona Beach, FL 32124-1002"
+    ],
+    "X298": [
+        "Tomoka Reality House CRC - 285 (Male): ",
+        "1341 Indian Lake Road Daytona Beach, Florida 32124"
+    ],
+    "X243": [
+        "TTH of Dinsmore CRC (Male): ",
+        "13200 Old Kings Road Jacksonville, Florida 32219"
+    ],
+    "X412": [
+        "Bradenton Bridge CRC (Female): ",
+        "2104 63rd Avenue, East Bradenton, Florida 34203-5012"
+    ],
+    "X341": [
+        "Bridges of Cocoa CRC (Male): ",
+        "585 Camp Road Cocoa, Florida 32927-4738"
+    ],
+    "X351": [
+        "Bridges of Orlando CRC (Male): ",
+        "2007 North Mercy Drive Orlando, Florida 32808-5613"
+    ],
+    "X374": [
+        "Kissimmee CRC (Male): ",
+        "2925 Michigan Avenue Kissimmee, Florida 34744-1200"
+    ],
+    "X352": [
+        "The Orlando Bridge CRC (Male): ",
+        "2041 North Mercy    Drive Orlando, Florida   32808-5613"
+    ],
+    "X361": [
+        "Orlando CRC (Female): ",
+        "7300 Laurel Hill Road Orlando, Florida 32818-5278"
+    ],
+    "X584": [
+        "Re-Entry Center of Ocala CRC (Male): ",
+        "2006 Northeast 8th Road Ocala, Florida 34470-4231"
+    ],
+    "X583": [
+        "St. Petersburg CRC (Male): ",
+        "4237 8th Avenue, South St. Petersburg, Florida 33711-2000"
+    ],
+    "X345": [
+        "Suncoast CRC (Female): ",
+        "10596 Gandy Boulevard St. Petersburg, Florida 33702-1422"
+    ],
+    "X540": [
+        "TTH of Bartow CRC (Male): ",
+        "550 N. Restwood Avenue Bartow, Florida  33830-4200"
+    ],
+    "X353": [
+        "TTH of Kissimmee CRC (Male): ",
+        "900 East Vine Street Kissimmee, Florida 34744"
+    ],
+    "X572": [
+        "TTH of Tarpon Springs CRC (Male): ",
+        "566 Brady Road Tarpon Springs, Florida 34689-6707"
+    ],
+    "X452": [
+        "Atlantic CRC (Female): ",
+        "263 Fairgrounds Road West Palm Beach, Florida 33411-3639"
+    ],
+    "X444": [
+        "Fort Pierce CRC (Male): ",
+        "1203 Bell Avenue Ft. Pierce, Florida 34982-6544"
+    ],
+    "X446": [
+        "Hollywood CRC (Female): ",
+        "8501 W. Cypress Drive Pembroke Pines, Florida 33025-4542"
+    ],
+    "X457": [
+        "Miami North CRC (Male): ",
+        "7090 Northwest 41st Street Miami, Florida 33166-6817"
+    ],
+    "X473": [
+        "Opa Locka CRC (Male): ",
+        "5400 Northwest 135th Street Opa Locka, Florida 33054-4310"
+    ],
+    "X470": [
+        "Turning Point CRC (Male): ",
+        "400 SW 2nd Avenue Pompano Beach, FL 33060"
+    ],
+    "X469": [
+        "West Palm Beach CRC (Male): ",
+        "261 West Fairgrounds Road West Palm Beach, Florida 33411-3639"
+    ]
+}

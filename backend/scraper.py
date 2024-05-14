@@ -1,6 +1,7 @@
 from query import Query
 
 from states import NewYork, Texas, Pennsylvania
+from states import NorthCarolina
 from abstractScraper import AbstractStateScraper
 from threading import Thread
 import urllib3
@@ -11,7 +12,8 @@ class Scraper:
         self.state_websites : dict[str, AbstractStateScraper] = {
             "NY": NewYork.NewYorkScraper(),
             "TX": Texas.TexasScraper(),
-            "PA": Pennsylvania.PennsylvaniaScraper()
+            "PA": Pennsylvania.PennsylvaniaScraper(),
+            "NC": NorthCarolina.NorthCarolinaScraper(),
         }
 
         constructors : list[type: Thread]= []
